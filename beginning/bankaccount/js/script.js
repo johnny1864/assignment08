@@ -23,28 +23,43 @@ function bankAccount(ownerName) {
     };
 }
 
-var account = bankAccount('Johnny');
+var name = 'Johnny'
+var account = bankAccount(name);
 
 window.addEventListener('load', function () {
     'use strict';
 
+    //BUTTON VARIABLES
     var withdrawBtn = $('withdrawal');
     var depositBtn = $('deposit');
-    
-    depositBtn.addEventListener('click')
- 
-    withdrawBtn.addEventListener('click', function(){
-       var withdraw = window.prompt('Enter amount you would like to withdraw:');
-        withdraw = (+withdraw);
+
+    //DISPLAYS NAME 
+    $('name').innerHTML = name;
+
+    var balance = $('display-balance');
+
+    depositBtn.addEventListener('click', function () {
+        var deposit = window.prompt('Enter deposit amount:');
+        deposit = parseFloat(deposit);
         
-//        console.log(typeof withdraw);
-//        if(typeof withdraw !== 'number'){
-//            window.alert('Enter a number!');
-//            return false;
-//        }
-        account.withdrawal(withdraw);
+        account.deposit(deposit);
+        
+        balance.innerHTML = "$" + account.getBalance().toFixed(2);
     });
-    
-    
+
+    withdrawBtn.addEventListener('click', function () {
+        var withdraw = window.prompt('Enter amount you would like to withdraw:');
+        withdraw = parseFloat(withdraw);
+
+        console.log(typeof withdraw);
+        //        if(typeof withdraw !== 'number'){
+        //            window.alert('Enter a number!');
+        //            return false;
+        //        }
+        account.withdrawal(withdraw);
+        balance.innerHTML = "$" + account.getBalance().toFixed(2);
+    });
+
+
 
 });
