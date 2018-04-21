@@ -42,6 +42,12 @@ window.addEventListener('load', function () {
         var deposit = window.prompt('Enter deposit amount:');
         deposit = parseFloat(deposit);
         
+        //DEPOSIT VALIDATION
+        if(typeof deposit !== 'number' || isNaN(deposit)){
+            window.alert('Enter a number!');
+            return false;
+        }
+        
         account.deposit(deposit);
         
         balance.innerHTML = "$" + account.getBalance().toFixed(2);
@@ -51,11 +57,12 @@ window.addEventListener('load', function () {
         var withdraw = window.prompt('Enter amount you would like to withdraw:');
         withdraw = parseFloat(withdraw);
 
-        console.log(typeof withdraw);
-        //        if(typeof withdraw !== 'number'){
-        //            window.alert('Enter a number!');
-        //            return false;
-        //        }
+        //WITHDRAW VALIDATION 
+        if(typeof withdraw !== 'number' || isNaN(withdraw)){
+            window.alert('Enter a number!');
+            return false;
+        }
+        
         account.withdrawal(withdraw);
         balance.innerHTML = "$" + account.getBalance().toFixed(2);
     });
