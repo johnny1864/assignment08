@@ -36,7 +36,7 @@ window.addEventListener('load', function () {
     //DISPLAYS NAME 
     $('name').innerHTML = name;
 
-    var balance = $('display-balance');
+    var balanceDisplay = $('display-balance');
 
     depositBtn.addEventListener('click', function () {
         var deposit = window.prompt('Enter deposit amount:');
@@ -50,7 +50,17 @@ window.addEventListener('load', function () {
         
         account.deposit(deposit);
         
-        balance.innerHTML = "$" + account.getBalance().toFixed(2);
+        var balance = account.getBalance().toFixed(2);
+        
+        //IF BALANCE IS LESS THAN ZERO, COLOR IS SET TO RED
+        //ELSE COLOR IS GREEN
+        if(+balance < 0 ){
+            balanceDisplay.setAttribute('style', 'color: red');
+        }else{
+            balanceDisplay.setAttribute('style', 'color: green');
+        }
+        
+        balanceDisplay.innerHTML = "$" + balance;
     });
 
     withdrawBtn.addEventListener('click', function () {
@@ -64,7 +74,18 @@ window.addEventListener('load', function () {
         }
         
         account.withdrawal(withdraw);
-        balance.innerHTML = "$" + account.getBalance().toFixed(2);
+        
+        var balance = account.getBalance().toFixed(2);
+        
+        //IF BALANCE IS LESS THAN ZERO, COLOR IS SET TO RED
+        //ELSE COLOR IS GREEN
+        if(+balance < 0 ){
+            balanceDisplay.setAttribute('style', 'color: red');
+        }else{
+            balanceDisplay.setAttribute('style', 'color: green');
+        }
+           
+        balanceDisplay.innerHTML = "$" + account.getBalance().toFixed(2);
     });
 
 
