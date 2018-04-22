@@ -4,11 +4,19 @@
 var createSlideshow = function () {
     "use strict";
     // PRIVATE VARIABLES AND FUNCTIONS
-    var timer, play = true, nodes, img, stopSlideShow, displayNextImage, setPlayText;
-    
-    nodes = { image: null, caption: null };
-    img = { cache: [], counter: 0 };
-    
+    var timer, play = true,
+        nodes, img, stopSlideShow, displayNextImage, setPlayText;
+    var speed = 2000;
+
+    nodes = {
+        image: null,
+        caption: null
+    };
+    img = {
+        cache: [],
+        counter: 0
+    };
+
     stopSlideShow = function () {
         clearInterval(timer);
     };
@@ -46,8 +54,16 @@ var createSlideshow = function () {
                 nodes.image = arguments[0];
                 nodes.caption = arguments[1];
             }
-            timer = setInterval(displayNextImage, 2000);
+            timer = setInterval(displayNextImage, speed);
             return this;
+        },
+        getSpeed: function(){
+            return speed;
+        },
+        setSpeed: function (newSpeed) {
+            var me = this;
+            speed = newSpeed;
+            me.startSlideShow();
         },
         createToggleHandler: function () {
             var me = this;
@@ -79,14 +95,35 @@ var slideshow = createSlideshow();
 window.addEventListener("load", function () {
     "use strict";
     var slides = [
-        {href: "images/backpack.jpg", title: "He backpacks in the Sierras often"},
-        {href: "images/boat.jpg", title: "He loves his boat"},
-        {href: "images/camaro.jpg", title: "He loves his Camaro more"},
-        {href: "images/punk.jpg", title: "He used to be in a punk band and toured with No Doubt and Sublime"},
-        {href: "images/race.jpg", title: "He's active and loves obstacle coarse racing"}
+        {
+            href: "images/backpack.jpg",
+            title: "He backpacks in the Sierras often"
+        },
+        {
+            href: "images/boat.jpg",
+            title: "He loves his boat"
+        },
+        {
+            href: "images/camaro.jpg",
+            title: "He loves his Camaro more"
+        },
+        {
+            href: "images/punk.jpg",
+            title: "He used to be in a punk band and toured with No Doubt and Sublime"
+        },
+        {
+            href: "images/race.jpg",
+            title: "He's active and loves obstacle coarse racing"
+        }
     ];
-	// START THE SLIDESHOW
+    // START THE SLIDESHOW
     slideshow.loadImages(slides).startSlideShow($("image"), $("caption"));
     // PAUSE THE SLIDESHOW
     $("play_pause").onclick = slideshow.createToggleHandler();
+    
+    $('speed-btn').addEventListener('click', function(){
+        var speed = window.prompt('Enter speed in milliseconds: ');
+        
+       slideshow.setSpeed(+speed);
+    });
 });
