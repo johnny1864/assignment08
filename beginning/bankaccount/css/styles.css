@@ -1,0 +1,24 @@
+#app{
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: arial sans-serif;
+}
+
+button{
+    width: 120px;
+    height: 60px;
+    cursor: pointer;
+    background-color: #00ffff;
+    border-color: #fff;
+    box-shadow: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1em;
+    letter-spacing: 2px;
+}
+
+h3{
+    font-size: 1.5em;
+    color: #444;
+}

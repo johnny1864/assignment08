@@ -61,9 +61,9 @@ var createSlideshow = function () {
             return speed;
         },
         setSpeed: function (newSpeed) {
-            var me = this;
             speed = newSpeed;
-            me.startSlideShow();
+            stopSlideShow();
+            this.startSlideShow();
         },
         createToggleHandler: function () {
             var me = this;
@@ -72,6 +72,7 @@ var createSlideshow = function () {
                 // 'THIS' IS THE CLICKED BUTTON
                 // 'ME' IS THE OBJECT LITERAL
                 if (play) {
+                    $()
                     stopSlideShow();
                 } else {
                     me.startSlideShow();
@@ -122,8 +123,17 @@ window.addEventListener("load", function () {
     $("play_pause").onclick = slideshow.createToggleHandler();
     
     $('speed-btn').addEventListener('click', function(){
-        var speed = window.prompt('Enter speed in milliseconds: ');
+        var currentSeed = slideshow.getSpeed();
         
-       slideshow.setSpeed(+speed);
+        var speed = window.prompt('Current speed is ' + currentSeed +'ms, enter new speed in milliseconds:');
+        
+        speed = Math.round(parseInt(speed));
+        
+        if(typeof speed !== 'number' || isNaN(speed)){
+            window.alert('Please enter valid number');
+            return false;
+        }
+        
+       slideshow.setSpeed(speed);
     });
 });
