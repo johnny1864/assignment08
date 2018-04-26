@@ -72,9 +72,11 @@ var createSlideshow = function () {
                 // 'THIS' IS THE CLICKED BUTTON
                 // 'ME' IS THE OBJECT LITERAL
                 if (play) {
-                    $()
+                    //DISABLE SPEED BUTTON IF PAUSED 
+                    $('speed-btn').disabled = true;
                     stopSlideShow();
                 } else {
+                    $('speed-btn').disabled = false;
                     me.startSlideShow();
                 }
                 setPlayText(this);
