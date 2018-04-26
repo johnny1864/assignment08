@@ -41,25 +41,25 @@ window.addEventListener('load', function () {
     depositBtn.addEventListener('click', function () {
         var deposit = window.prompt('Enter deposit amount:');
         deposit = parseFloat(deposit);
-        
+
         //DEPOSIT VALIDATION
-        if(typeof deposit !== 'number' || isNaN(deposit)){
-            window.alert('Enter a number!');
+        if (typeof deposit !== 'number' || isNaN(deposit) || deposit < 0) {
+            window.alert('Enter a valid number!');
             return false;
         }
-        
+
         account.deposit(deposit);
-        
+
         var balance = account.getBalance().toFixed(2);
-        
+
         //IF BALANCE IS LESS THAN ZERO, COLOR IS SET TO RED
         //ELSE COLOR IS GREEN
-        if(+balance < 0 ){
+        if (+balance < 0) {
             balanceDisplay.setAttribute('style', 'color: red');
-        }else{
+        } else {
             balanceDisplay.setAttribute('style', 'color: green');
         }
-        
+
         balanceDisplay.innerHTML = "$" + balance;
     });
 
@@ -68,23 +68,23 @@ window.addEventListener('load', function () {
         withdraw = parseFloat(withdraw);
 
         //WITHDRAW VALIDATION 
-        if(typeof withdraw !== 'number' || isNaN(withdraw)){
-            window.alert('Enter a number!');
+        if (typeof withdraw !== 'number' || isNaN(withdraw) || withdraw < 0) {
+            window.alert('Enter a valid number!');
             return false;
         }
-        
+
         account.withdrawal(withdraw);
-        
+
         var balance = account.getBalance().toFixed(2);
-        
+
         //IF BALANCE IS LESS THAN ZERO, COLOR IS SET TO RED
         //ELSE COLOR IS GREEN
-        if(+balance < 0 ){
+        if (+balance < 0) {
             balanceDisplay.setAttribute('style', 'color: red');
-        }else{
+        } else {
             balanceDisplay.setAttribute('style', 'color: green');
         }
-           
+
         balanceDisplay.innerHTML = "$" + account.getBalance().toFixed(2);
     });
 
